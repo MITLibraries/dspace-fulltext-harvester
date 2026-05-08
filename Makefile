@@ -1,8 +1,8 @@
 SHELL=/bin/bash
 DATETIME:=$(shell date -u +%Y%m%dT%H%M%SZ)
 
-ECR_NAME_DEV:=<REPOSITORY_NAME>-dev # NOTE: required update from template values
-ECR_URL_DEV:=222053980223.dkr.ecr.us-east-1.amazonaws.com/<REPOSITORY_NAME>-dev # NOTE: required update from template values
+ECR_NAME_DEV:=dspace-fulltext-harvester-dev
+ECR_URL_DEV:=222053980223.dkr.ecr.us-east-1.amazonaws.com/dspace-fulltext-harvester-dev
 
 CPU_ARCH ?= $(shell cat .aws-architecture 2>/dev/null || echo "linux/amd64")
 
@@ -11,7 +11,7 @@ help: # Preview Makefile commands
 /^[-_[:alpha:]]+:.?*#/ { printf "  %-15s%s\n", $$1, $$2 }' $(MAKEFILE_LIST)
 
 # ensure OS binaries aren't called if naming conflict with Make recipes
-.PHONY: help install venv update test coveralls lint lint-fix security my-app check-arch dist-dev docker-clean publish-dev
+.PHONY: help install venv update test coveralls lint lint-fix security dfh check-arch dist-dev docker-clean publish-dev
 
 ##############################################
 # Python Environment and Dependency commands
@@ -43,7 +43,7 @@ update: # Update Python dependencies
 ######################
 
 test: # Run tests and print a coverage report
-	uv run coverage run --source=my_app -m pytest -vv
+	uv run coverage run --source=dfh -m pytest -vv
 	uv run coverage report -m
 
 coveralls: test # Write coverage data to an LCOV report
@@ -68,8 +68,8 @@ security: # Run security / vulnerability checks
 ##############################
 # CLI convenience commands
 ##############################
-my-app: # CLI without any arguments, utilizing uv script entrypoint
-	uv run my-app
+dfh: # CLI without any arguments, utilizing uv script entrypoint
+	uv run dfh
 
 ###############################################
 # Docker image, ECR, and Lambda Management
