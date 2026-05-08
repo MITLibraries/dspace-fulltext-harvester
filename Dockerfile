@@ -13,9 +13,9 @@ WORKDIR /app
 COPY pyproject.toml uv.lock* ./
 
 # Copy CLI application
-COPY my_app ./my_app
+COPY dfh ./dfh
 
 # Install package into the system Python environment
 RUN uv pip install --system .
 
-ENTRYPOINT ["my-app"]
+ENTRYPOINT ["dfh"]

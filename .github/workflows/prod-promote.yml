@@ -16,8 +16,8 @@ jobs:
     secrets: inherit
     with:
       AWS_REGION: us-east-1
-      GHA_ROLE_STAGE: <REPOSITORY_NAME>-gha-stage # NOTE: required update from template values
-      GHA_ROLE_PROD: <REPOSITORY_NAME>-gha-prod # NOTE: required update from template values
-      ECR_STAGE: <REPOSITORY_NAME>-stage # NOTE: required update from template values
-      ECR_PROD: <REPOSITORY_NAME>-prod # NOTE: required update from template values
+      GHA_ROLE_STAGE: dspace-fulltext-harvester-gha-stage
+      GHA_ROLE_PROD: dspace-fulltext-harvester-gha-prod
+      ECR_STAGE: dspace-fulltext-harvester-stage
+      ECR_PROD: dspace-fulltext-harvester-prod
       # DEFAULT_BRANCH: # Only if the default branch is not "main"!
