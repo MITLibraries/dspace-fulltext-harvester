@@ -10,6 +10,7 @@ requires-python = ">=3.13"
 dependencies = [
     "click>=8.2.1",
     "sentry-sdk>=2.34.1",
+    "timdex-dataset-api",
 ]
 
 [dependency-groups]
@@ -83,6 +84,9 @@ dfh = "dfh.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["dfh", "dfh.*"]
+
+[tool.uv.sources]
+timdex-dataset-api = { git = "https://github.com/MITLibraries/timdex-dataset-api" }
 
 [build-system]
 requires = ["setuptools>=61"]
