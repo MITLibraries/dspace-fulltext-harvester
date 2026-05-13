@@ -26,7 +26,15 @@ dev = [
 [tool.mypy]
 disallow_untyped_calls = true
 disallow_untyped_defs = true
-exclude = ["tests/"]
+exclude = ["tests/", "output/"]
+
+[[tool.mypy.overrides]]
+module = [
+    "requests",
+    "timdex_dataset_api",
+    "timdex_dataset_api.*",
+]
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 log_level = "INFO"
@@ -34,6 +42,7 @@ log_level = "INFO"
 [tool.ruff]
 target-version = "py313"
 line-length = 90
+exclude = ["output"]
 
 # enumerate all fixed violations
 show-fixes = true
@@ -41,20 +50,26 @@ show-fixes = true
 [tool.ruff.lint]
 select = ["ALL", "PT"]
 ignore = [
-    "COM812",
-    "D107", 
-    "N812", 
-    "PTH", 
     "C90",
+    "COM812",
     "D100",
-    "D101", 
+    "D101",
     "D102",
     "D103",
-    "D104", 
+    "D104",
+    "D107",
+    "EM101",
+    "EM102",
+    "G004",
+    "N812",
     "PLR0912",
-    "PLR0913", 
+    "PLR0913",
     "PLR0915",
+    "PTH",
     "S321",
+    "TD002",
+    "TD003",
+    "TRY003"
 ]
 
 # allow autofix behavior for specified rules
