@@ -132,7 +132,7 @@ class TIMDEXThesesRecords:
 
     @classmethod
     def is_thesis_record(cls, record: dict) -> bool:
-        """Determines if a TIMDEX dataset record is a DSpace Theses.
+        """Determines if a TIMDEX dataset record is a DSpace Thesis.
 
         This is determined by looking at the transformed record and looking for 'Thesis'
         in the content_type field.
@@ -143,7 +143,7 @@ class TIMDEXThesesRecords:
     def get_text_bitstream_info_from_source_record(
         self, source_record: bytes
     ) -> TextBitstreamInfo:
-        """Extract fulltext bitstream information from DSpace source METS XML."""
+        """Extract TEXT bitstream information from DSpace source METS XML."""
         mets = self.get_mets_root(source_record)
         return self.get_text_bitstream_info_from_mets(mets)
 
