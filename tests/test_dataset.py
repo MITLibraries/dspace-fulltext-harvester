@@ -5,7 +5,11 @@ import re
 
 import pytest
 
-from dfh.timdex_dataset import MissingTextBitstreamError, TIMDEXThesesRecords
+from dfh.timdex_dataset import (
+    MissingTextBitstreamError,
+    SourceRecordParseError,
+    TIMDEXThesesRecords,
+)
 
 
 def test_init_requires_dataset_location(monkeypatch):
@@ -35,7 +39,7 @@ def test_theses_records_returns_only_records_with_thesis_content_type(
     assert result == [dspace_records[0]]
 
 
-def test_record_and_bitstream_metadata_iter_yields_metadata_and_skips_missing_bitstream(
+def test_record_and_bitstream_metadata_iter_yields_metadata_and_skips_bitstream_errors(
     caplog,
     monkeypatch,
     dspace_mets_source_record,
@@ -65,6 +69,15 @@ def test_record_and_bitstream_metadata_iter_yields_metadata_and_skips_missing_bi
             "source_record": dspace_mets_missing_text_filegrp_source_record,
             "transformed_record": json.dumps(timdex_record),
         },
+        {
+            "timdex_record_id": "dspace:malformed-source-record",
+            "run_id": timdex_record["timdex_provenance"]["run_id"],
+            "run_record_offset": 3,
+            "run_date": timdex_record["timdex_provenance"]["run_date"],
+            "run_timestamp": "2026-05-13T00:00:02Z",
+            "source_record": b"<root>",
+            "transformed_record": json.dumps(timdex_record),
+        },
     ]
     monkeypatch.setattr(
         timdex_theses_records.timdex_dataset.records,
@@ -74,14 +87,19 @@ def test_record_and_bitstream_metadata_iter_yields_metadata_and_skips_missing_bi
 
     result = list(timdex_theses_records.record_and_bitstream_metadata_iter())
 
-    assert "TIMDEX dataset DSpace records: retrieved=2" in caplog.text
+    assert "TIMDEX dataset DSpace records: retrieved=3" in caplog.text
     assert (
         "Error parsing fulltext bitstream information for 'dspace:missing-text-filegrp': "
         "Could not find 'TEXT' fileGrp in METS" in caplog.text
     )
     assert (
-        "TIMDEX dataset DSpace theses: processed=2 yielded=1 "
-        "missing_fulltext_bitstream=1" in caplog.text
+        "Error parsing fulltext bitstream information for "
+        "'dspace:malformed-source-record': Could not parse source_record XML:"
+        in caplog.text
+    )
+    assert (
+        "TIMDEX dataset DSpace theses: processed=3 yielded=1 "
+        "fulltext_bitstream_errors=2" in caplog.text
     )
     assert result == [
         {
@@ -105,6 +123,30 @@ def test_get_text_bitstream_info_from_source_record(
     )
 
     assert result == dspace_mets_text_bitstream_info
+
+
+@pytest.mark.parametrize(
+    ("source_record", "message"),
+    [
+        pytest.param(
+            b"<root>",
+            "Could not parse source_record XML:",
+            id="malformed-xml",
+        ),
+        pytest.param(
+            b"<root />",
+            "Could not find METS element in source_record",
+            id="missing-mets",
+        ),
+    ],
+)
+def test_get_mets_root_raises_source_record_parse_error(
+    source_record,
+    message,
+    timdex_theses_records,
+):
+    with pytest.raises(SourceRecordParseError, match=re.escape(message)):
+        timdex_theses_records.get_mets_root(source_record)
 
 
 @pytest.mark.parametrize(
