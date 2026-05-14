@@ -181,7 +181,7 @@ def test_get_text_bitstream_info_from_source_record_raises_error(
     timdex_theses_records,
 ):
     """Parameterized test demonstrates that MissingTextBitstreamError is thrown for a
-    variety of reasons if a TEXT bistream UUID cannot be identified from the DSpace METS.
+    variety of reasons if a TEXT bitstream UUID cannot be identified from the DSpace METS.
     """
     source_record = request.getfixturevalue(source_record_fixture)
 

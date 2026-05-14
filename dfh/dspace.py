@@ -125,7 +125,7 @@ class DSpaceClient:
         return r
 
     def get_presigned_url_for_bitstream(self, bitstream_uuid: str) -> str:
-        """Generate a pre-signed S3 S3 download URL for a bistream UUID.
+        """Generate a pre-signed S3 S3 download URL for a bitstream UUID.
 
         The URL returned is valid for a limited amount of time and a single request.
         """

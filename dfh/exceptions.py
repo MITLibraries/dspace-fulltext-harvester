@@ -3,7 +3,7 @@ class SourceRecordParseError(ValueError):
 
 
 class MissingTextBitstreamError(Exception):
-    """Custom exception to raise when fulltext bistream not found in DSpace METS.
+    """Custom exception to raise when fulltext bitstream not found in DSpace METS.
 
     A typical 'good' METS file will contain a 'fileGrp' section that looks roughly like
     the following, allowing us to extract a bitstream UUID for the 'TEXT' bitstream via
