@@ -25,8 +25,9 @@ class DSpaceClient:
         self._default_headers = {"Content-type": "application/json"}
 
         # authenticate on init
-        if auth_on_init:
-            self.authenticate()
+        if auth_on_init:  # noqa: SIM102
+            if not self.authenticate():
+                raise RuntimeError("Could not authenticate DSpaceClient")
 
     def _update_xsrf_token(self, response: requests.Response) -> None:
         """Extract DSPACE-XSRF-TOKEN from response and store in session."""
