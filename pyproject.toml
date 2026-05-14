@@ -9,6 +9,7 @@ requires-python = ">=3.13"
 
 dependencies = [
     "click>=8.2.1",
+    "dspace-rest-client>=0.1.17",
     "requests>=2.33.1",
     "sentry-sdk>=2.34.1",
     "timdex-dataset-api",
@@ -31,6 +32,8 @@ exclude = ["tests/", "output/"]
 
 [[tool.mypy.overrides]]
 module = [
+    "dspace_rest_client",
+    "dspace_rest_client.*",
     "requests",
     "timdex_dataset_api",
     "timdex_dataset_api.*",
