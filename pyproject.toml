@@ -18,6 +18,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "coveralls>=4.0.1",
+    "ipython>=9.13.0",
     "mypy>=1.17.1",
     "pip-audit>=2.9.0",
     "pre-commit>=4.3.0",
