@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<record xmlns="http://www.openarchives.org/OAI/2.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <header>
+        <identifier>oai:dspace.mit.edu:1721.1/139336</identifier>
+        <datestamp>2026-02-19T02:13:49Z</datestamp>
+        <setSpec>com_1721.1_7582</setSpec>
+        <setSpec>com_1721.1_7581</setSpec>
+        <setSpec>col_1721.1_131023</setSpec>
+    </header>
+    <metadata>
+        <mets ID="DSpace_ITEM_1721.1-139336"
+              OBJID="hdl:1721.1/139336"
+              PROFILE="DSpace METS SIP Profile 1.0"
+              TYPE="DSpace ITEM" xmlns="http://www.loc.gov/METS/"
+              xmlns:doc="http://www.lyncode.com/xoai"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.loc.gov/METS/ http://www.loc.gov/standards/mets/mets.xsd">
+            <metsHdr CREATEDATE="2026-04-09T17:21:46Z">
+                <agent ROLE="CUSTODIAN" TYPE="ORGANIZATION">
+                    <name>DSpace at My University</name>
+                </agent>
+            </metsHdr>
+            <dmdSec ID="DMD_1721.1_139336">
+                <mdWrap MDTYPE="MODS">
+                    <xmlData xmlns:mods="http://www.loc.gov/mods/v3"
+                             xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-1.xsd">
+                        <mods:mods
+                                xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-1.xsd">
+                            <mods:name>
+                                <mods:role>
+                                    <mods:roleTerm type="text">advisor</mods:roleTerm>
+                                </mods:role>
+                                <mods:namePart>Amarasinghe, Saman P.</mods:namePart>
+                            </mods:name>
+                            <mods:name>
+                                <mods:role>
+                                    <mods:roleTerm type="text">author</mods:roleTerm>
+                                </mods:role>
+                                <mods:namePart>Ramirez, Gabriel L.</mods:namePart>
+                            </mods:name>
+                            <mods:name>
+                                <mods:role>
+                                    <mods:roleTerm type="text">department</mods:roleTerm>
+                                </mods:role>
+                                <mods:namePart>Massachusetts Institute of Technology.
+                                    Department of Electrical Engineering and Computer
+                                    Science
+                                </mods:namePart>
+                            </mods:name>
+                            <mods:extension>
+                                <mods:dateAccessioned encoding="iso8601">
+                                    2022-01-14T15:04:50Z
+                                </mods:dateAccessioned>
+                            </mods:extension>
+                            <mods:extension>
+                                <mods:dateAvailable encoding="iso8601">
+                                    2022-01-14T15:04:50Z
+                                </mods:dateAvailable>
+                            </mods:extension>
+                            <mods:originInfo>
+                                <mods:dateIssued encoding="iso8601">2021-06
+                                </mods:dateIssued>
+                            </mods:originInfo>
+                            <mods:identifier type="uri">
+                                https://hdl.handle.net/1721.1/139336
+                            </mods:identifier>
+                            <mods:abstract>Static languages like C++ provide deep compiler
+                                support for optimization and analysis, enabling high
+                                performance at the cost of burdening users with a
+                                low-level interface. DSLs, or domain-specific languages,
+                                have traditionally complemented static languages by adding
+                                custom idioms and optimizations in their particular areas.
+                                Unfortunately, however, static languages are increasingly
+                                sidelined in many domains by dynamic languages such as
+                                Python and Ruby, which, despite their flexibility, suffer
+                                from lower performance. In this thesis, we propose Codon,
+                                a framework for implementing high-performance DSLs based
+                                on Python. Whereas previously achieving high-performance
+                                in dynamic languages has been difficult, often requiring
+                                separate compiled libraries, we provide a robust base for
+                                analysis and optimization on a purely Pythonic base,
+                                bridging the gap between dynamic and static languages. By
+                                combining a purpose-built type checker and novel
+                                intermediate representation, Codon enables developers to
+                                create intrinsically performant, modular DSLs with minimal
+                                implementation effort. We validate this approach by
+                                showcasing several Codon DSLs, all of which achieve
+                                sizeable speed-ups over Python and sometimes even C++. We
+                                further show that Codon can be easily used to implement a
+                                variety of analyses and passes. Thus, Codon enables a new
+                                class of DSLs that maintain dynamism and expressiveness,
+                                without compromising performance.
+                            </mods:abstract>
+                            <mods:language>
+                                <mods:languageTerm authority="rfc3066"/>
+                            </mods:language>
+                            <mods:accessCondition type="useAndReproduction">In Copyright -
+                                Educational Use Permitted Copyright MIT
+                            </mods:accessCondition>
+                            <mods:titleInfo>
+                                <mods:title>Codon: A Framework for Pythonic
+                                    Domain-Specific Languages
+                                </mods:title>
+                            </mods:titleInfo>
+                            <mods:genre>Thesis</mods:genre>
+                        </mods:mods>
+                    </xmlData>
+                </mdWrap>
+            </dmdSec>
+            <amdSec ID="FO_1721.1_139336_1">
+                <techMD ID="TECH_O_1721.1_139336_1">
+                    <mdWrap MDTYPE="PREMIS">
+                        <xmlData xmlns:premis="http://www.loc.gov/standards/premis"
+                                 xsi:schemaLocation="http://www.loc.gov/standards/premis http://www.loc.gov/standards/premis/PREMIS-v1-0.xsd">
+                            <premis:premis>
+                                <premis:object>
+                                    <premis:objectIdentifier>
+                                        <premis:objectIdentifierType>URL
+                                        </premis:objectIdentifierType>
+                                        <premis:objectIdentifierValue>
+                                            https://dspace.mit.edu/bitstreams/bd70af03-74f2-404f-9a33-ff0f70a98f00/download
+                                        </premis:objectIdentifierValue>
+                                    </premis:objectIdentifier>
+                                    <premis:objectCategory>File</premis:objectCategory>
+                                    <premis:objectCharacteristics>
+                                        <premis:fixity>
+                                            <premis:messageDigestAlgorithm>MD5
+                                            </premis:messageDigestAlgorithm>
+                                            <premis:messageDigest>
+                                                4906a8bec67791859ff7a3deab2edaee
+                                            </premis:messageDigest>
+                                        </premis:fixity>
+                                        <premis:size>825497</premis:size>
+                                        <premis:format>
+                                            <premis:formatDesignation>
+                                                <premis:formatName>application/pdf
+                                                </premis:formatName>
+                                            </premis:formatDesignation>
+                                        </premis:format>
+                                    </premis:objectCharacteristics>
+                                    <premis:originalName>
+                                        Ramirez-glram-meng-eecs-2021-thesis.pdf
+                                    </premis:originalName>
+                                </premis:object>
+                            </premis:premis>
+                        </xmlData>
+                    </mdWrap>
+                </techMD>
+            </amdSec>
+            <amdSec ID="FT_1721.1_139336_2">
+                <techMD ID="TECH_T_1721.1_139336_2">
+                    <mdWrap MDTYPE="PREMIS">
+                        <xmlData xmlns:premis="http://www.loc.gov/standards/premis"
+                                 xsi:schemaLocation="http://www.loc.gov/standards/premis http://www.loc.gov/standards/premis/PREMIS-v1-0.xsd">
+                            <premis:premis>
+                                <premis:object>
+                                    <premis:objectIdentifier>
+                                        <premis:objectIdentifierType>URL
+                                        </premis:objectIdentifierType>
+                                        <premis:objectIdentifierValue>
+                                            https://dspace.mit.edu/bitstreams/07b3dc83-dc11-4c6d-9ba5-771f0bb141d8/download
+                                        </premis:objectIdentifierValue>
+                                    </premis:objectIdentifier>
+                                    <premis:objectCategory>File</premis:objectCategory>
+                                    <premis:objectCharacteristics>
+                                        <premis:fixity>
+                                            <premis:messageDigestAlgorithm>MD5
+                                            </premis:messageDigestAlgorithm>
+                                            <premis:messageDigest>
+                                                c6716e0e5ba7b572948dac054633a665
+                                            </premis:messageDigest>
+                                        </premis:fixity>
+                                        <premis:size>110423</premis:size>
+                                        <premis:format>
+                                            <premis:formatDesignation>
+                                                <premis:formatName>text/plain
+                                                </premis:formatName>
+                                            </premis:formatDesignation>
+                                        </premis:format>
+                                    </premis:objectCharacteristics>
+                                    <premis:originalName>
+                                        Ramirez-glram-meng-eecs-2021-thesis.pdf.txt
+                                    </premis:originalName>
+                                </premis:object>
+                            </premis:premis>
+                        </xmlData>
+                    </mdWrap>
+                </techMD>
+            </amdSec>
+            <fileSec>
+                <fileGrp USE="ORIGINAL">
+                    <file ADMID="FO_1721.1_139336_1"
+                          CHECKSUM="4906a8bec67791859ff7a3deab2edaee" CHECKSUMTYPE="MD5"
+                          GROUPID="GROUP_BITSTREAM_1721.1_139336_1"
+                          ID="BITSTREAM_ORIGINAL_1721.1_139336_1"
+                          MIMETYPE="application/pdf" SEQ="1" SIZE="825497">
+                        <FLocat LOCTYPE="URL"
+                                xlink:href="https://dspace.mit.edu/bitstreams/bd70af03-74f2-404f-9a33-ff0f70a98f00/download"
+                                xlink:type="simple"/>
+                    </file>
+                </fileGrp>
+                <!-- TEXT fileGrp intentionally removed for parser error fixture -->
+            </fileSec>
+            <structMap LABEL="DSpace Object" TYPE="LOGICAL">
+                <div ADMID="DMD_1721.1_139336" TYPE="DSpace Object Contents">
+                    <div TYPE="DSpace BITSTREAM">
+                        <fptr FILEID="BITSTREAM_ORIGINAL_1721.1_139336_1"/>
+                    </div>
+                </div>
+            </structMap>
+        </mets>
+    </metadata>
+</record>

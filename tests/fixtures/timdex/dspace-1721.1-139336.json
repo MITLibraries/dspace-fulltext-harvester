@@ -1,0 +1,62 @@
+{
+  "source": "DSpace@MIT",
+  "source_link": "https://dspace.mit.edu/handle/1721.1/139336",
+  "timdex_record_id": "dspace:1721.1-139336",
+  "title": "Codon: A Framework for Pythonic Domain-Specific Languages",
+  "citation": "Ramirez, Gabriel L. (2021-06): Codon: A Framework for Pythonic Domain-Specific Languages. Thesis. https://dspace.mit.edu/handle/1721.1/139336",
+  "content_type": [
+    "Thesis"
+  ],
+  "contributors": [
+    {
+      "value": "Amarasinghe, Saman P.",
+      "kind": "advisor"
+    },
+    {
+      "value": "Ramirez, Gabriel L.",
+      "kind": "author"
+    },
+    {
+      "value": "Massachusetts Institute of Technology. Department of Electrical Engineering and Computer Science",
+      "kind": "department"
+    }
+  ],
+  "dates": [
+    {
+      "kind": "Publication date",
+      "value": "2021-06"
+    }
+  ],
+  "file_formats": [
+    "application/pdf"
+  ],
+  "format": "electronic resource",
+  "identifiers": [
+    {
+      "value": "https://hdl.handle.net/1721.1/139336",
+      "kind": "uri"
+    }
+  ],
+  "links": [
+    {
+      "url": "https://hdl.handle.net/1721.1/139336",
+      "kind": "Digital object URL",
+      "text": "Digital object URL"
+    }
+  ],
+  "rights": [
+    {
+      "description": "In Copyright - Educational Use Permitted Copyright MIT",
+      "kind": "useAndReproduction"
+    }
+  ],
+  "summary": [
+    "Static languages like C++ provide deep compiler support for optimization and analysis, enabling high performance at the cost of burdening users with a low-level interface. DSLs, or domain-specific languages, have traditionally complemented static languages by adding custom idioms and optimizations in their particular areas. Unfortunately, however, static languages are increasingly sidelined in many domains by dynamic languages such as Python and Ruby, which, despite their flexibility, suffer from lower performance. In this thesis, we propose Codon, a framework for implementing high-performance DSLs based on Python. Whereas previously achieving high-performance in dynamic languages has been difficult, often requiring separate compiled libraries, we provide a robust base for analysis and optimization on a purely Pythonic base, bridging the gap between dynamic and static languages. By combining a purpose-built type checker and novel intermediate representation, Codon enables developers to create intrinsically performant, modular DSLs with minimal implementation effort. We validate this approach by showcasing several Codon DSLs, all of which achieve sizeable speed-ups over Python and sometimes even C++. We further show that Codon can be easily used to implement a variety of analyses and passes. Thus, Codon enables a new class of DSLs that maintain dynamism and expressiveness, without compromising performance."
+  ],
+  "timdex_provenance": {
+    "source": "dspace",
+    "run_date": "2026-05-13",
+    "run_id": "5e11f27e-fe05-44f4-8bcb-5acbdb032cf3",
+    "run_record_offset": 109979
+  }
+}
