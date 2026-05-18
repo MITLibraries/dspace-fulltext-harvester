@@ -120,8 +120,8 @@ def _record_with_fulltext(
         "timdex_record_id": record["timdex_record_id"],
         "run_id": record["run_id"],
         "run_record_offset": record["run_record_offset"],
-        "fulltext_bistream_uuid": bitstream_uuid,
-        "fulltext_bistream_content": fulltext,
+        "fulltext_bitstream_uuid": bitstream_uuid,
+        "fulltext_bitstream_content": fulltext,
     }
 
 
