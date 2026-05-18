@@ -6,6 +6,7 @@ import click
 import jsonlines
 
 from dfh.config import configure_logger, configure_sentry
+from dfh.dspace import warm_dspace_auth
 from dfh.harvest import record_and_fulltext_iter
 from dfh.timdex_dataset import TIMDEXThesesRecords
 
@@ -111,6 +112,9 @@ def harvest(
         2. Use to retrieve fulltext from DSpace, yielding as another iterator
         3. Write record + fulltext to TIMDEX dataset or JSONLines as output
     """
+    # warm DSpace API authentication
+    warm_dspace_auth()
+
     # get iterator of target TIMDEX records + bitstream information
     ttr = TIMDEXThesesRecords(
         dataset_location=dataset_location,
