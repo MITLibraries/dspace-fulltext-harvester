@@ -8,15 +8,15 @@ import pytest
 from dfh.timdex_dataset import (
     MissingTextBitstreamError,
     SourceRecordParseError,
-    TIMDEXThesesRecords,
+    get_timdex_dataset,
 )
 
 
-def test_init_requires_dataset_location(monkeypatch):
+def test_get_timdex_dataset_requires_dataset_location(monkeypatch):
     monkeypatch.delenv("TIMDEX_DATASET_LOCATION", raising=False)
 
     with pytest.raises(ValueError, match="dataset_location"):
-        TIMDEXThesesRecords()
+        get_timdex_dataset(None)
 
 
 def test_theses_records_returns_only_records_with_thesis_content_type(

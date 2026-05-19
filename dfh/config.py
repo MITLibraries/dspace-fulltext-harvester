@@ -8,14 +8,16 @@ def configure_logger(logger: logging.Logger, *, verbose: bool) -> str:
     if verbose:
         logging.basicConfig(
             format="%(asctime)s %(levelname)s %(name)s.%(funcName)s() line %(lineno)d: "
-            "%(message)s"
+            "%(message)s",
+            force=True,
         )
         logger.setLevel(logging.DEBUG)
         for handler in logging.root.handlers:
             handler.addFilter(logging.Filter("dfh"))
     else:
         logging.basicConfig(
-            format="%(asctime)s %(levelname)s %(name)s.%(funcName)s(): %(message)s"
+            format="%(asctime)s %(levelname)s %(name)s.%(funcName)s(): %(message)s",
+            force=True,
         )
         logger.setLevel(logging.INFO)
     return (

@@ -24,6 +24,20 @@ class TextBitstreamInfo(TypedDict):
     mimetype: str | None
 
 
+def get_timdex_dataset(dataset_location: str | None) -> TIMDEXDataset:
+    """Get an initialized TIMDEXDataset instance.
+
+    If dataset_location is not passed, look to env var TIMDEX_DATASET_LOCATION.
+    """
+    dataset_location = dataset_location or os.getenv("TIMDEX_DATASET_LOCATION")
+    if not dataset_location:
+        raise ValueError(
+            "'dataset_location' must be passed on init "
+            "or env var 'TIMDEX_DATASET_LOCATION' set"
+        )
+    return TIMDEXDataset(dataset_location)
+
+
 class TIMDEXThesesRecords:
     """Class to retrieve TIMDEX dataset records of DSpace Theses.
 
@@ -42,32 +56,21 @@ class TIMDEXThesesRecords:
 
     def __init__(
         self,
-        dataset_location: str | None = None,
+        timdex_dataset: TIMDEXDataset,
         run_id: str | None = None,
         limit: int | None = None,
     ) -> None:
+        self.timdex_dataset = timdex_dataset
         self.run_id = run_id
         self.limit = limit
-
-        self.timdex_dataset = self._init_timdex_dataset(dataset_location)
-
-    def _init_timdex_dataset(self, dataset_location: str | None) -> TIMDEXDataset:
-        """Init TIMDEXDataset and compose to self.
-
-        If dataset_location is not passed, look to env var TIMDEX_DATASET_LOCATION.
-        """
-        dataset_location = dataset_location or os.getenv("TIMDEX_DATASET_LOCATION")
-        if not dataset_location:
-            raise ValueError(
-                "'dataset_location' must be passed on init "
-                "or env var 'TIMDEX_DATASET_LOCATION' set"
-            )
-        return TIMDEXDataset(dataset_location)
 
     def record_and_bitstream_metadata_iter(
         self,
     ) -> Iterator[dict]:
         """Yield TIMDEX DSpace thesis records with their fulltext bitstream info."""
+        logger.debug(
+            "Preparing to yield record + bitstream metadata from TIMDEX dataset."
+        )
         record_count = 0
         error_count = 0
         for record in self.theses_records():
