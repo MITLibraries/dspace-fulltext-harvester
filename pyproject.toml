@@ -109,7 +109,7 @@ dfh = "dfh.cli:main"
 include = ["dfh", "dfh.*"]
 
 [tool.uv.sources]
-timdex-dataset-api = { git = "https://github.com/MITLibraries/timdex-dataset-api", rev = "USE-531-fulltext-data-type-add" }
+timdex-dataset-api = { git = "https://github.com/MITLibraries/timdex-dataset-api" }
 
 [build-system]
 requires = ["setuptools>=61"]
