@@ -3,6 +3,7 @@ import os
 import time
 
 from dspace_rest_client.client import DSpaceClient
+from requests import Response
 
 logger = logging.getLogger(__name__)
 
@@ -28,6 +29,23 @@ def get_dspace_client(
             raise RuntimeError("Could not authenticate DSpaceClient")
 
     return client
+
+
+def api_get_with_auth_refresh(dspace_client: DSpaceClient, url: str) -> Response:
+    """Perform GET routes via DSpace API, re-authenticating if auth is stale.
+
+    Note: many other POST, PUT, DELETE routes in the dspace-rest-python client library
+    perform automatic re-authentication / token refresh, but not GET routes.  Testing
+    confirms that this is required for long running harvests where the connection got
+    stale.
+    """
+    response = dspace_client.api_get(url)
+    if response.status_code == 401:  # noqa: PLR2004
+        logger.debug("DSpace client auth appears stale; re-authenticating")
+        if not dspace_client.authenticate():
+            raise RuntimeError("Could not re-authenticate DSpaceClient")
+        response = dspace_client.api_get(url)
+    return response
 
 
 def warm_dspace_auth(
@@ -87,8 +105,9 @@ def get_presigned_url_for_bitstream(
 
     The URL returned is valid for a limited amount of time and a single request.
     """
-    response = dspace_client.api_get(
-        f"{dspace_client.API_ENDPOINT}/core/bitstreams/{bitstream_uuid}/signedurl"
+    response = api_get_with_auth_refresh(
+        dspace_client,
+        f"{dspace_client.API_ENDPOINT}/core/bitstreams/{bitstream_uuid}/signedurl",
     )
     if response.status_code != 200:  # noqa: PLR2004
         raise ValueError(
