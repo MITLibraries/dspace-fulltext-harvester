@@ -1,14 +1,16 @@
 import logging
 import time
-from datetime import timedelta
+from collections.abc import Iterator
+from datetime import datetime, timedelta
 
 import click
 import jsonlines
+from timdex_dataset_api.data_types import DatasetFulltext
 
 from dfh.config import configure_logger, configure_sentry
 from dfh.dspace import warm_dspace_auth
 from dfh.harvest import record_and_fulltext_iter
-from dfh.timdex_dataset import TIMDEXThesesRecords
+from dfh.timdex_dataset import TIMDEXThesesRecords, get_timdex_dataset
 
 logger = logging.getLogger(__name__)
 
@@ -115,26 +117,43 @@ def harvest(
     # warm DSpace API authentication
     warm_dspace_auth()
 
+    # init TIMDEXDataset instance, used for reading and writing
+    timdex_dataset = get_timdex_dataset(dataset_location)
+
     # get iterator of target TIMDEX records + bitstream information
     ttr = TIMDEXThesesRecords(
-        dataset_location=dataset_location,
+        timdex_dataset=timdex_dataset,
         run_id=run_id,
         limit=record_limit,
     )
     records_and_bitstreams = ttr.record_and_bitstream_metadata_iter()
 
-    # get iterator of records + fulltext, ready for writing
+    # get iterator of DatasetFulltext instances, ready for writing
     records_and_fulltexts = record_and_fulltext_iter(
         records_and_bitstreams,
         max_workers=workers,
     )
 
-    if not output_jsonl:
-        raise ValueError(
-            "WIP: Until TIMDEX dataset has new 'fulltexts' "
-            "data type, only JSONL output is supported."
-        )
+    # write to local JSONLines file for debugging
+    if output_jsonl:
+        write_jsonlines_output(output_jsonl, records_and_fulltexts)
+    # default: write to TIMDEX dataset
+    else:
+        timdex_dataset.fulltexts.write(records_and_fulltexts)
 
+
+def write_jsonlines_output(
+    output_jsonl: str,
+    records_and_fulltexts: Iterator[DatasetFulltext],
+) -> None:
+    """Utility function to write to JSONLines for local debugging."""
     with jsonlines.open(output_jsonl, "w") as writer:
         for record in records_and_fulltexts:
-            writer.write(record)
+            output_record = record.to_dict()
+            fulltext = output_record["fulltext"]
+            if isinstance(fulltext, bytes):
+                output_record["fulltext"] = fulltext.decode()
+            timestamp = output_record["fulltext_timestamp"]
+            if isinstance(timestamp, datetime):
+                output_record["fulltext_timestamp"] = timestamp.isoformat()
+            writer.write(output_record)

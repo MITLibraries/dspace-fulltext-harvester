@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 from click.testing import CliRunner
+from timdex_dataset_api import TIMDEXDataset
 
 from dfh.timdex_dataset import TIMDEXThesesRecords
 
@@ -90,5 +91,10 @@ def dspace_mets_text_bitstream_info():
 
 
 @pytest.fixture
-def timdex_theses_records(tmp_path):
-    return TIMDEXThesesRecords(dataset_location=str(tmp_path))
+def timdex_dataset(tmp_path):
+    return TIMDEXDataset(str(tmp_path))
+
+
+@pytest.fixture
+def timdex_theses_records(timdex_dataset):
+    return TIMDEXThesesRecords(timdex_dataset=timdex_dataset)

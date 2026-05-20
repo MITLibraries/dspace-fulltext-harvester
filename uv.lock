@@ -555,6 +555,7 @@ source = { editable = "." }
 dependencies = [
     { name = "click" },
     { name = "dspace-rest-client" },
+    { name = "joblib" },
     { name = "jsonlines" },
     { name = "requests" },
     { name = "sentry-sdk" },
@@ -565,6 +566,7 @@ dependencies = [
 dev = [
     { name = "coveralls" },
     { name = "ipython" },
+    { name = "joblib-stubs" },
     { name = "mypy" },
     { name = "pip-audit" },
     { name = "pre-commit" },
@@ -576,16 +578,18 @@ dev = [
 requires-dist = [
     { name = "click", specifier = ">=8.2.1" },
     { name = "dspace-rest-client", specifier = ">=0.1.17" },
+    { name = "joblib", specifier = ">=1.5.3" },
     { name = "jsonlines", specifier = ">=4.0.0" },
     { name = "requests", specifier = ">=2.33.1" },
     { name = "sentry-sdk", specifier = ">=2.34.1" },
-    { name = "timdex-dataset-api", git = "https://github.com/MITLibraries/timdex-dataset-api" },
+    { name = "timdex-dataset-api", git = "https://github.com/MITLibraries/timdex-dataset-api?rev=USE-531-fulltext-data-type-add" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "coveralls", specifier = ">=4.0.1" },
     { name = "ipython", specifier = ">=9.13.0" },
+    { name = "joblib-stubs", specifier = ">=1.5.3.1.20260117" },
     { name = "mypy", specifier = ">=1.17.1" },
     { name = "pip-audit", specifier = ">=2.9.0" },
     { name = "pre-commit", specifier = ">=4.3.0" },
@@ -892,6 +896,27 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/d3/59/322338183ecda247fb5d1763a6cbe46eff7222eaeebafd9fa65d4bf5cb11/jmespath-1.1.0.tar.gz", hash = "sha256:472c87d80f36026ae83c6ddd0f1d05d4e510134ed462851fd5f754c8c3cbb88d", size = 27377, upload-time = "2026-01-22T16:35:26.279Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/14/2f/967ba146e6d58cf6a652da73885f52fc68001525b4197effc174321d70b4/jmespath-1.1.0-py3-none-any.whl", hash = "sha256:a5663118de4908c91729bea0acadca56526eb2698e83de10cd116ae0f4e97c64", size = 20419, upload-time = "2026-01-22T16:35:24.919Z" },
+]
+
+[[package]]
+name = "joblib"
+version = "1.5.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/41/f2/d34e8b3a08a9cc79a50b2208a93dce981fe615b64d5a4d4abee421d898df/joblib-1.5.3.tar.gz", hash = "sha256:8561a3269e6801106863fd0d6d84bb737be9e7631e33aaed3fb9ce5953688da3", size = 331603, upload-time = "2025-12-15T08:41:46.427Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7b/91/984aca2ec129e2757d1e4e3c81c3fcda9d0f85b74670a094cc443d9ee949/joblib-1.5.3-py3-none-any.whl", hash = "sha256:5fc3c5039fc5ca8c0276333a188bbd59d6b7ab37fe6632daa76bc7f9ec18e713", size = 309071, upload-time = "2025-12-15T08:41:44.973Z" },
+]
+
+[[package]]
+name = "joblib-stubs"
+version = "1.5.3.1.20260117"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5e/4e/a4801406630955fe935d9d99efef72fd7398543f51fe5a787be80c235b4f/joblib_stubs-1.5.3.1.20260117.tar.gz", hash = "sha256:d420f9e26636df01e1bda851bf5bce9a8dbd6db84f08afe1dfdb963e6651e724", size = 14147, upload-time = "2026-01-17T11:16:43.666Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/37/7c/67ada9621b3c93caa75aba1a0b651dae988b22cdea93b33e7e49261364f5/joblib_stubs-1.5.3.1.20260117-py3-none-any.whl", hash = "sha256:ef9f570617b232263c8166f5b4351a5dcc90669d8b07e7e2cd7b25c3b0f26d5f", size = 21358, upload-time = "2026-01-17T11:16:44.327Z" },
 ]
 
 [[package]]
@@ -1826,8 +1851,8 @@ wheels = [
 
 [[package]]
 name = "timdex-dataset-api"
-version = "5.0.0"
-source = { git = "https://github.com/MITLibraries/timdex-dataset-api#6c1caa87c6c04a9f01996f7f74bec94ed72934c4" }
+version = "5.1.0"
+source = { git = "https://github.com/MITLibraries/timdex-dataset-api?rev=USE-531-fulltext-data-type-add#7dd5850ce2babdaf8414611268c4e5bcc700461b" }
 dependencies = [
     { name = "attrs" },
     { name = "boto3" },
