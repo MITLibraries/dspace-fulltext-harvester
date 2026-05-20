@@ -24,7 +24,7 @@ dev = [
     "joblib-stubs>=1.5.3.1.20260117",
     "mypy>=1.17.1",
     "pip-audit>=2.9.0",
-    "pre-commit>=4.3.0",
+    "pre-commit>=4.6.0",
     "pytest>=8.4.1",
     "ruff>=0.12.8",
 ]
