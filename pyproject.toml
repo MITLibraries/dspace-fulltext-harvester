@@ -19,7 +19,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "coveralls>=4.0.1",
+    "coveralls>=4.1.0",
     "ipython>=9.13.0",
     "joblib-stubs>=1.5.3.1.20260117",
     "mypy>=1.17.1",
