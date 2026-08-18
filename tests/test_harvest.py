@@ -64,6 +64,37 @@ def test_record_and_fulltext_iter_yields_fulltext_dataset_row(
     assert result.fulltext == b"fulltext content"
 
 
+def test_record_and_fulltext_iter_bails_after_failure_rate_threshold(record):
+    records = iter([record] * RECORD_COUNT)
+    failed_result = DatasetFulltext(
+        timdex_record_id=record["timdex_record_id"],
+        run_id=record["run_id"],
+        run_record_offset=record["run_record_offset"],
+        fulltext=None,
+    )
+
+    with (
+        # mock errors on every record
+        mock.patch(
+            "dfh.harvest._get_record_with_fulltext",
+            return_value=failed_result,
+        ),
+        # assert this run termination when failure threshold met
+        pytest.raises(
+            RuntimeError,
+            match="Terminating harvest after 2 processed records",
+        ),
+    ):
+        list(
+            record_and_fulltext_iter(
+                records,
+                max_workers=1,
+                # set threshold low, so 3/3 failures will trigger
+                min_completed_records_threshold=2,
+            )
+        )
+
+
 def test_get_record_with_fulltext_retries_presigned_url_429(
     record,
     presigned_url,

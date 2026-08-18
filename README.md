@@ -69,6 +69,7 @@ Options:
                            harvest fulltext for.
   --record-limit INTEGER   Maximum records of records to retrieve and harvest
                            fulltext for.
+  --workers INTEGER        Max number of parallel workers for downloading.
   --output-jsonl TEXT      Write harvested fulltext to a local JSONLines file
                            (primarily for testing).
   --help                   Show this message and exit.
