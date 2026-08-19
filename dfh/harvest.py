@@ -20,13 +20,20 @@ threaded_dspace_clients = threading.local()
 def record_and_fulltext_iter(
     records: Iterator[dict],
     max_workers: int = 10,
-    log_progress_interval: int = 1000,
+    log_progress_interval: int = 100,
+    min_completed_records_threshold: int = 25,
+    max_failed_record_percent: float = 0.9,
 ) -> Iterator[DatasetFulltext]:
     """Yield records with fulltext fetched in parallel.
 
     Uses a threaded worker to generate pre-signed URLs and download bitstream content in
-    parallel.  The worker function _get_record_with_fulltext() has built-in retries.  As
-    such, this orchestration function is not concerned with retries.
+    parallel.  The worker function _get_record_with_fulltext() has built-in retries.
+
+    This method has a built-in circuit breaker for cascading failures using the args
+    'min_completed_records_threshold' and 'max_failed_record_percent'.  If we've hit a
+    minimum threshold of records seen (min_completed_records_threshold) and the percentage
+    of failures is high (max_failed_record_percent), terminate the job immediately to
+    avoid ongoing failures.  Defaults are 90% failure of 25+ records.
     """
     parallel_client = Parallel(
         n_jobs=max_workers,
@@ -39,12 +46,27 @@ def record_and_fulltext_iter(
 
     # log results
     count = 0
+    failed_count = 0
     for result in results:
         count += 1
+        if result.fulltext is None:
+            logger.debug(f"Failure for record: {result}")
+            failed_count += 1
+            failure_percent = failed_count / count
+            if (
+                count >= min_completed_records_threshold
+                and failure_percent >= max_failed_record_percent
+            ):
+                msg = (
+                    f"Terminating harvest after {count} processed records, hit max "
+                    f"failure percentage: {max_failed_record_percent}."
+                )
+                logger.error(msg)
+                raise RuntimeError(msg)
         if count % log_progress_interval == 0:
-            logger.info(f"Extracted fulltext for {count} records.")
+            logger.info(f"Total records processed: {count}, {failed_count} failures.")
         yield result
-    logger.info(f"Extraction complete for {count} records.")
+    logger.info(f"Extraction complete for {count} records, {failed_count} failures.")
 
 
 def _get_record_with_fulltext(
