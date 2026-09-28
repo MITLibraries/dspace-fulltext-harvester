@@ -1,9 +1,11 @@
+import json
 import logging
-import os
 import time
 
 from dspace_rest_client.client import DSpaceClient
 from requests import Response
+
+from dfh.config import get_dspace_credentials
 
 logger = logging.getLogger(__name__)
 
@@ -12,18 +14,39 @@ HTTP_OK = 200
 
 def get_dspace_client(
     *,
-    api_base: str | None = None,
-    username: str | None = None,
-    password: str | None = None,
+    credentials: dict | None = None,
     auth_on_init: bool = True,
 ) -> DSpaceClient:
-    """Instantiate a DSpace API client."""
+    """Instantiate a DSpace API client.
+
+    Args:
+        - credentials: optional dictionary with values
+            - url: str
+            - user: str
+            - password: str
+            - headers: optional dict of headers to inject into API requests
+        - auth_on_init: authenticate on client initialization if True
+    """
+    if not credentials:
+        credentials = get_dspace_credentials()
+
     client = DSpaceClient(
-        api_endpoint=(api_base or os.environ["DSPACE_API_BASE"]).rstrip("/"),
-        username=username or os.environ["DSPACE_USERNAME"],
-        password=password or os.environ["DSPACE_PASSWORD"],
+        api_endpoint=(credentials["url"]).rstrip("/"),
+        username=credentials["user"],
+        password=credentials["password"],
         fake_user_agent=True,
     )
+
+    # NOTE: Remove after header management has been standardized in the 3rd party
+    #   dspace-rest-python client.
+    if credentials.get("headers"):
+        logger.debug("Injecting headers into DSpace client")
+        headers = json.loads(credentials["headers"])
+        client.request_headers.update(headers)
+        client.auth_request_headers.update(headers)
+        client.list_request_headers.update(headers)
+        client.session.headers.update(headers)
+
     if auth_on_init:  # noqa: SIM102
         if not client.authenticate():
             raise RuntimeError("Could not authenticate DSpaceClient")

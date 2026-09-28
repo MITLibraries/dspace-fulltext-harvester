@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 
@@ -33,3 +34,12 @@ def configure_sentry() -> str:
         sentry_sdk.init(sentry_dsn, environment=env)
         return f"Sentry DSN found, exceptions will be sent to Sentry with env={env}"
     return "No Sentry DSN found, exceptions will not be sent to Sentry"
+
+
+# NOTE: Currently using an env var that provides readwrite credentials until an env var
+#   that provides readonly credentials is available.  Will update at that time.
+def get_dspace_credentials(env_var: str = "OPENSCHOL_RW_API_CREDS_JSON") -> dict:
+    credentials_json = os.getenv(env_var)
+    if not credentials_json:
+        raise RuntimeError(f"Env var '{env_var}' is required but not set.")
+    return json.loads(credentials_json)
