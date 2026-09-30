@@ -18,7 +18,7 @@ def test_warm_dspace_auth_retries_after_401_and_succeeds():
 
 def test_get_dspace_client_parses_credentials_json_from_env(monkeypatch):
     monkeypatch.setenv(
-        "OPENSCHOL_RW_API_CREDS_JSON",
+        "DSPACE_CREDS_JSON",
         json.dumps(
             {"url": "https://dspace.example.edu/api/", "user": "test", "password": "test"}
         ),
