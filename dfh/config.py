@@ -38,7 +38,7 @@ def configure_sentry() -> str:
 
 # NOTE: Currently using an env var that provides readwrite credentials until an env var
 #   that provides readonly credentials is available.  Will update at that time.
-def get_dspace_credentials(env_var: str = "OPENSCHOL_RW_API_CREDS_JSON") -> dict:
+def get_dspace_credentials(env_var: str = "DSPACE_CREDS_JSON") -> dict:
     credentials_json = os.getenv(env_var)
     if not credentials_json:
         raise RuntimeError(f"Env var '{env_var}' is required but not set.")
